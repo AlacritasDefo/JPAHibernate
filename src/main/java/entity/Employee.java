@@ -10,10 +10,10 @@ public class Employee {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 75)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 125)
     private String email;
 
     public int getId() {
