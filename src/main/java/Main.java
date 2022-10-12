@@ -2,7 +2,7 @@ import entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import util.HibernateUtil;
-
+import java.util.*;
 
 
 public class Main {
@@ -27,15 +27,25 @@ public class Main {
             updateEmp.setName("newName");
             session.save(updateEmp);
             session.getTransaction().commit();
+            //Get list
+            List<Employee> employeeList = session.createQuery("From Employee").list();
+            for(Employee e : employeeList){
+                System.out.println(e);
+            }
             //Get Updated
             Employee getEemployee2 = session.get(Employee.class, 1);
             System.out.println(getEemployee2);
             //Delete
+            session.beginTransaction();
             Employee deleteEmployee = session.get(Employee.class, 1);
             session.delete(deleteEmployee);
-
+            session.getTransaction().commit();
             Employee deletedEmp = session.get(Employee.class, 1);
             System.out.println(deletedEmp);
+            List<Employee> employeeList2 = session.createQuery("From Employee").list();
+            for(Employee e : employeeList2){
+                System.out.println(e);
+            }
 
 
         }catch (Exception e){
